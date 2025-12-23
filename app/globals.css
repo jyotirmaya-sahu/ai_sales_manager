@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-background: #FFFFFF;
+  --color-secondary: #F7F7F8;
+  --color-foreground: #000000;
+  --color-heading: #003720;
+  /* Dark Forest Green */
+  --color-muted: #6A6C6A;
+  /* Sage Gray */
+  --color-header-muted: #AFB7B4;
+  /* Muted Header Gray */
+  --color-accent: #94F27F;
+  /* Vibrant Lime */
+  --color-accent-hover: #86DB72;
+  --color-border: #E5E7EB;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --radius-card: 24px;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-fade-in-up: fade-in-up 0.8s ease-out forwards;
+
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
+/* Base resets */
+:root {
+  --background: #FFFFFF;
+  --foreground: #000000;
+}
+
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(at 10% 0%, hsla(30, 100%, 96%, 1) 0px, transparent 50%),
+    radial-gradient(at 90% 0%, hsla(140, 100%, 93%, 1) 0px, transparent 50%),
+    radial-gradient(at 50% 20%, #FFFFFF 0px, transparent 80%);
+  background-attachment: fixed;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Custom Utilities */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.text-heading {
+  color: var(--color-heading);
+}
+
+/* Custom utility for quiet separation */
+.section-gap {
+  @apply py-24 md:py-32;
 }
