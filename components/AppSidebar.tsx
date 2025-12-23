@@ -15,11 +15,16 @@ import TimelineIcon from '@mui/icons-material/Timeline';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { usePathname } from 'next/navigation';
 
-export default function AppSidebar() {
+export default function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
     const router = useRouter();
     const pathname = usePathname();
     const supabase = createClient();
     const [loading, setLoading] = React.useState(false);
+
+    const handleNavigation = (path: string) => {
+        router.push(path);
+        if (onNavigate) onNavigate();
+    };
 
     const handleNewCall = async () => {
         setLoading(true);
@@ -46,6 +51,7 @@ export default function AppSidebar() {
             window.dispatchEvent(new Event('sales-manager:refresh-calls'));
 
             router.push(`/app/${data.id}`);
+            if (onNavigate) onNavigate();
         } catch (err: any) {
             console.error('Error creating call:', err);
             // For MVP, alerting on error is acceptable
@@ -58,12 +64,13 @@ export default function AppSidebar() {
     const handleLogout = async () => {
         await supabase.auth.signOut();
         router.push('/login');
+        if (onNavigate) onNavigate();
     };
 
     return (
         <Box
             sx={{
-                width: 250,
+                width: { xs: '100%', md: 250 },
                 height: '100%',
                 borderRight: '1px solid',
                 borderColor: 'divider',
@@ -82,7 +89,7 @@ export default function AppSidebar() {
             <List sx={{ px: 2 }}>
                 <ListItemButton
                     selected={pathname === '/app'}
-                    onClick={() => router.push('/app')}
+                    onClick={() => handleNavigation('/app')}
                     sx={{ borderRadius: 2, mb: 0.5 }}
                 >
                     <DescriptionIcon sx={{ fontSize: 20, color: 'text.secondary', mr: 1.5 }} />
@@ -94,7 +101,7 @@ export default function AppSidebar() {
 
                 <ListItemButton
                     selected={pathname === '/app/trends'}
-                    onClick={() => router.push('/app/trends')}
+                    onClick={() => handleNavigation('/app/trends')}
                     sx={{ borderRadius: 2 }}
                 >
                     <TimelineIcon sx={{ fontSize: 20, color: 'text.secondary', mr: 1.5 }} />

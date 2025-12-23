@@ -75,7 +75,7 @@ export default function CallList() {
     return (
         <Box
             sx={{
-                width: 320,
+                width: { xs: '100%', md: 320 },
                 height: '100%',
                 borderRight: '1px solid',
                 borderColor: 'divider',

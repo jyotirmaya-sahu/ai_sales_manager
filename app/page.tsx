@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center bg-[var(--color-secondary)] selection:bg-[var(--color-accent)] selection:text-[var(--color-heading)]">
@@ -41,11 +42,11 @@ export default function Home() {
 
 
           {/* Product Demo - Before/After Cards */}
-          <div id="demo-section" className="relative w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 items-start text-left z-20">
+          <div id="demo-section" className="relative w-full max-w-5xl grid grid-cols-2 md:grid-cols-2 gap-8 items-start text-left z-20">
             {/* Left Card - Raw */}
             <div className="relative">
               <div className="text-center mb-4 text-[var(--color-muted)] font-medium text-sm">Your notes + transcript</div>
-              <div className="bg-white rounded-[24px] shadow-xl p-8 min-h-[420px] relative border border-gray-100 rotate-[-2deg] transition-transform hover:rotate-0 duration-500">
+              <div className="bg-white rounded-[24px] shadow-xl p-8 h-[400px] min-w-[200px] md:min-w-0  md:h-auto md:min-h-[420px] overflow-hidden md:overflow-visible relative border border-gray-100 rotate-[-2deg] transition-transform hover:rotate-0 duration-500">
                 {/* Header */}
                 <div className="flex items-start gap-4 mb-8">
                   <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -53,14 +54,14 @@ export default function Home() {
                   <div className="w-3 h-3 rounded-full bg-green-400"></div>
                 </div>
                 {/* Content */}
-                <h3 className="text-xl font-bold text-black mb-2">Intro call: AllFound</h3>
-                <div className="flex items-center gap-2 text-xs text-gray-500 mb-6 font-mono">
+                <h3 className="text-sm md:text-xl font-bold text-black mb-2">Intro call: AllFound</h3>
+                <div className="flex items-center gap-2 text-[10px] md:text-sm text-gray-500 mb-6 font-mono">
                   <span>3:30pm</span>
                   <div className="w-4 h-4 rounded-full bg-gray-200"></div>
                   <span>Joss +1</span>
                 </div>
 
-                <div className="font-mono text-sm space-y-4">
+                <div className="font-mono text-[7px] md:text-sm space-y-4">
                   <p>Company around 100 ppl, growing fast</p>
                   <p>Using Tuesday.ai currently but team finds it too manual</p>
 
@@ -95,12 +96,12 @@ export default function Home() {
             </div>
 
             {/* Right Card - AI Enhanced */}
-            <div className="relative">
+            <div className="relative -ml-20 md:ml-0">
               <div className="text-center mb-4 text-green-600 font-medium text-sm flex items-center justify-center gap-2">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" /></svg>
                 AI enhanced
               </div>
-              <div className="bg-white rounded-[24px] shadow-2xl p-8 min-h-[500px] border border-green-100 rotate-[2deg] transition-transform hover:rotate-0 duration-500 relative z-10">
+              <div className="bg-white rounded-[24px] shadow-2xl p-8 h-[400px] md:h-auto md:min-h-[500px] overflow-hidden md:overflow-visible border border-green-100 rotate-[2deg] transition-transform hover:rotate-0 duration-500 relative z-10">
                 {/* Header */}
                 <div className="flex items-start gap-4 mb-8">
                   <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -108,7 +109,7 @@ export default function Home() {
                   <div className="w-3 h-3 rounded-full bg-green-400"></div>
                 </div>
                 {/* Content */}
-                <h3 className="text-xl font-bold text-black mb-2">Intro call: AllFound</h3>
+                <h3 className="text-sm md:text-xl font-bold text-black mb-2">Intro call: AllFound</h3>
                 <div className="flex items-center gap-2 text-xs text-gray-500 mb-6">
                   <span>3:30pm</span>
                   <div className="w-4 h-4 rounded-full bg-gray-200"></div>
@@ -117,15 +118,15 @@ export default function Home() {
 
                 <div className="space-y-6">
                   <div>
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">AllFound Summary</h4>
-                    <ul className="list-disc list-outside ml-4 text-sm text-[var(--color-heading)] space-y-1">
+                    <h4 className="text-[8px] md:text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">AllFound Summary</h4>
+                    <ul className="list-disc list-outside ml-4 text-[7px] md:text-sm text-[var(--color-heading)] space-y-1">
                       <li>Introductory <strong>call with AllFound </strong>to understand their current sales tooling and pain points.</li>
                       <li>The team is evaluating alternatives due to <strong>manual workflows and pricing concerns.</strong></li>
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Key Insights</h4>
-                    <ul className="list-disc list-outside ml-4 text-sm text-[var(--color-heading)] space-y-1">
+                    <h4 className="text-[8px] md:text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Key Insights</h4>
+                    <ul className="list-disc list-outside ml-4 text-[7px] md:text-sm text-[var(--color-heading)] space-y-1">
                       <li>Company size: <strong>~100 employees</strong>, planning to grow next quarter</li>
                       <li>Current tool: <strong>Tuesday.ai</strong></li>
                       <li>Primary pain point: Manual data entry and complex setup for reps</li>
@@ -133,8 +134,8 @@ export default function Home() {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Coaching Notes (For Sales Rep)</h4>
-                    <ul className="list-disc list-outside ml-4 text-sm text-[var(--color-heading)] space-y-1">
+                    <h4 className="text-[8px] md:text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Coaching Notes (For Sales Rep)</h4>
+                    <ul className="list-disc list-outside ml-4 text-[7px] md:text-sm text-[var(--color-heading)] space-y-1">
                       <li>Lead pricing discussion earlier to uncover budget sensitivity</li>
                       <li>Emphasize simplicity and time savings over features</li>
                       <li>Prepare a side-by-side comparison vs Tuesday.ai</li>
@@ -151,7 +152,7 @@ export default function Home() {
       <section className="w-full max-w-5xl px-6 py-24 md:py-32">
         <div className="flex flex-col md:flex-row gap-16 items-start">
           {/* Left Column: Section Label */}
-          <div className="md:w-1/3 sticky top-32">
+          <div className="md:w-1/3 md:sticky md:top-32">
             <div className="flex gap-6">
               <div className="w-px h-24 bg-gray-200 shrink-0"></div>
               <div className="flex flex-col pt-1">
