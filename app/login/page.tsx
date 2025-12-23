@@ -18,6 +18,7 @@ export default function LoginPage() {
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
     const [isSignUp, setIsSignUp] = React.useState(false);
+    const [signUpSuccess, setSignUpSuccess] = React.useState(false);
 
     const handleAuth = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,10 +32,8 @@ export default function LoginPage() {
                     password,
                 });
                 if (error) throw error;
-                // Auto-login or show message often handled by Supabase, 
-                // but for simple email/pass without confirm (if disabled), it works.
-                // If email confirm is ON, this might pause. Assuming dev mode/no confirm for MVP.
-                alert('Check your email for confirmation link!');
+                // Show success message within the card
+                setSignUpSuccess(true);
             } else {
                 const { error } = await supabase.auth.signInWithPassword({
                     email,
@@ -49,6 +48,50 @@ export default function LoginPage() {
             setLoading(false);
         }
     };
+
+    if (signUpSuccess) {
+        return (
+            <Card
+                sx={{
+                    width: '100%',
+                    maxWidth: 400,
+                    p: 4,
+                    borderRadius: 4,
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 3,
+                    textAlign: 'center',
+                    alignItems: 'center'
+                }}
+            >
+                <Box sx={{ width: 60, height: 60, borderRadius: '50%', bgcolor: '#e8f5e9', display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6L9 17L4 12" stroke="#2e7d32" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                </Box>
+                <Box>
+                    <Typography variant="h6" fontWeight="700" color="text.primary" gutterBottom>
+                        Check your email
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+                        We've sent a confirmation link to <strong>{email}</strong>.<br />
+                        Please click the link to confirm your account and sign in.
+                    </Typography>
+                </Box>
+                <Button
+                    variant="text"
+                    onClick={() => {
+                        setSignUpSuccess(false);
+                        setIsSignUp(false); // Switch to sign in mode
+                    }}
+                    sx={{ textTransform: 'none', color: 'text.primary', fontWeight: 500 }}
+                >
+                    Back to Sign In
+                </Button>
+            </Card>
+        );
+    }
 
     return (
         <Card

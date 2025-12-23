@@ -9,6 +9,8 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function CallList() {
     const router = useRouter();
@@ -52,6 +54,24 @@ export default function CallList() {
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     };
 
+    const handleDelete = async (e: React.MouseEvent, callId: string) => {
+        e.stopPropagation(); // Prevent opening the call
+        if (!confirm('Are you sure you want to delete this call? This cannot be undone.')) return;
+
+        try {
+            const { error } = await supabase.from('calls').delete().eq('id', callId);
+            if (error) throw error;
+
+            setCalls(prev => prev.filter(c => c.id !== callId));
+            if (currentId === callId) {
+                router.push('/app');
+            }
+        } catch (err) {
+            console.error('Error deleting call:', err);
+            alert('Failed to delete call');
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -93,14 +113,18 @@ export default function CallList() {
                                 borderColor: 'divider',
                                 borderLeft: currentId === call.id ? '4px solid #1c1c1e' : '4px solid transparent',
                                 transition: 'all 0.2s',
-                                bgcolor: currentId === call.id ? 'rgba(0,0,0,0.03) !important' : 'transparent'
+                                bgcolor: currentId === call.id ? 'rgba(0,0,0,0.03) !important' : 'transparent',
+                                position: 'relative',
+                                '&:hover .delete-btn': { opacity: 1 }
                             }}
                         >
                             <ListItemText
                                 primary={
-                                    <Typography variant="subtitle2" fontWeight="600" mb={0.5} noWrap>
-                                        {call.title || 'Untitled Call'}
-                                    </Typography>
+                                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <Typography variant="subtitle2" fontWeight="600" mb={0.5} noWrap sx={{ maxWidth: '80%' }}>
+                                            {call.title || 'Untitled Call'}
+                                        </Typography>
+                                    </Box>
                                 }
                                 secondary={
                                     <React.Fragment>
@@ -110,6 +134,24 @@ export default function CallList() {
                                     </React.Fragment>
                                 }
                             />
+
+                            <IconButton
+                                className="delete-btn"
+                                size="small"
+                                onClick={(e) => handleDelete(e, call.id)}
+                                sx={{
+                                    position: 'absolute',
+                                    right: 8,
+                                    top: '50%',
+                                    transform: 'translateY(-50%)',
+                                    opacity: 0,
+                                    transition: 'opacity 0.2s',
+                                    color: 'text.secondary',
+                                    '&:hover': { color: 'error.main', bgcolor: 'rgba(211, 47, 47, 0.04)' }
+                                }}
+                            >
+                                <DeleteIcon fontSize="small" />
+                            </IconButton>
                         </ListItemButton>
                     ))}
                 </List>

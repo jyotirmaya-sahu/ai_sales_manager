@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import DescriptionIcon from '@mui/icons-material/Description';
 import TimelineIcon from '@mui/icons-material/Timeline';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { usePathname } from 'next/navigation';
 
 export default function AppSidebar() {
@@ -52,6 +53,11 @@ export default function AppSidebar() {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        router.push('/login');
     };
 
     return (
@@ -111,10 +117,28 @@ export default function AppSidebar() {
                         borderRadius: 2,
                         height: 40,
                         textTransform: 'none',
-                        '&:hover': { backgroundColor: '#3a3a3c' }
+                        '&:hover': { backgroundColor: '#3a3a3c' },
+                        mb: 1
                     }}
                 >
                     {loading ? 'Creating...' : 'New Call'}
+                </Button>
+
+                <Button
+                    fullWidth
+                    onClick={handleLogout}
+                    startIcon={<LogoutIcon sx={{ fontSize: 20 }} />}
+                    sx={{
+                        color: 'text.secondary',
+                        borderRadius: 2,
+                        height: 40,
+                        textTransform: 'none',
+                        justifyContent: 'flex-start',
+                        px: 2,
+                        '&:hover': { backgroundColor: 'rgba(0,0,0,0.05)' }
+                    }}
+                >
+                    Sign Out
                 </Button>
             </Box>
         </Box>

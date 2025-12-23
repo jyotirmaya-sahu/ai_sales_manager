@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center bg-[var(--color-secondary)] selection:bg-[var(--color-accent)] selection:text-[var(--color-heading)]">
@@ -29,17 +31,17 @@ export default function Home() {
 
           {/* Hero CTA - Premium Invite */}
           <div className="flex flex-col md:flex-row items-center gap-4 mb-20 animate-fade-in-up [animation-delay:200ms]">
-            <button className="px-8 py-4 bg-[var(--color-heading)] text-white rounded-full font-medium text-lg hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md cursor-pointer">
+            <Link href="/login" className="px-8 py-4 bg-[var(--color-heading)] text-white rounded-full font-medium text-lg hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md cursor-pointer text-center flex items-center justify-center">
               View the demo
-            </button>
-            <button className="px-8 py-4 text-[var(--color-heading)] rounded-full font-medium text-lg hover:bg-[var(--color-heading)]/5 transition-all cursor-pointer">
+            </Link>
+            <a href="#demo-section" className="px-8 py-4 text-[var(--color-heading)] rounded-full font-medium text-lg hover:bg-[var(--color-heading)]/5 transition-all cursor-pointer text-center flex items-center justify-center">
               Explore the product
-            </button>
+            </a>
           </div>
 
 
           {/* Product Demo - Before/After Cards */}
-          <div className="relative w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 items-start text-left z-20">
+          <div id="demo-section" className="relative w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 items-start text-left z-20">
             {/* Left Card - Raw */}
             <div className="relative">
               <div className="text-center mb-4 text-[var(--color-muted)] font-medium text-sm">Your notes + transcript</div>
@@ -289,9 +291,9 @@ export default function Home() {
         <p className="text-gray-500 text-lg md:text-xl mb-12 max-w-2xl leading-relaxed">
           See how sales managers turn calls into clear insights and actionable coaching.
         </p>
-        <button className="px-8 py-4 bg-[var(--color-heading)] text-white rounded-full font-medium text-lg hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md">
+        <Link href="/login" className="px-8 py-4 bg-[var(--color-heading)] text-white rounded-full font-medium text-lg hover:bg-opacity-90 transition-all shadow-sm hover:shadow-md text-center flex items-center justify-center">
           View the demo
-        </button>
+        </Link>
       </section>
     </main>
   );
